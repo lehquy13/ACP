@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Application", "ACP.Appl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Application.Contracts", "ACP.Application.Contracts\ACP.Application.Contracts.csproj", "{BD471AAF-5BFB-46B6-94D2-1DE2BB7FAEB4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Persistence", "ACP.EntityFrameworkCore\ACP.Persistence.csproj", "{EBDA1701-96AA-4211-8D77-A202E6964A53}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Persistence", "ACP.Persistence\ACP.Persistence.csproj", "{EBDA1701-96AA-4211-8D77-A202E6964A53}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Auditing", "Auditing", "{BCC7CB6D-F88B-414D-9BC8-D9FFD40E4708}"
 EndProject
