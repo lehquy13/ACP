@@ -7,12 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.31.0" />
+    <ProjectReference Include="..\ACP.Domain.Shared\ACP.Domain.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ACP.Application.Contracts\ACP.Application.Contracts.csproj" />
-    <ProjectReference Include="..\ACP.Domain\ACP.Domain.csproj" />
+    <Folder Include="Common\" />
   </ItemGroup>
 
 </Project>
