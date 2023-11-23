@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using ACP.Domain.Common.Abstractions;
 
-namespace ACP.Domain.Repositories;
+namespace ACP.Domain.Interfaces.Repositories;
 
 //TODO: may change IEntity<TEntity> to IAggregateRoot<TId> 
 public interface IRepository<TEntity, TId> : IReadOnlyRepository<TEntity, TId>

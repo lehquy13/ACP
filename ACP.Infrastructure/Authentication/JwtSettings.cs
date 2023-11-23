@@ -1,4 +1,4 @@
-﻿namespace ACP.Infrastructure.Persistence.Authentication;
+﻿namespace ACP.Infrastructure.Authentication;
 
 public class JwtSettings
 {

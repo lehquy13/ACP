@@ -1,45 +1,107 @@
-﻿using ACP.Domain.Common.Primitives;
+﻿using System.Security.Cryptography;
+using System.Text;
+using ACP.Domain.Common.Primitives;
+using ACP.Domain.Entities.ValueObjects;
 
 namespace ACP.Domain.Entities.Identities;
 
-public class IdentityUser : AggregateRoot<Guid>
+public class IdentityUser : AggregateRoot<IdentityGuid>
 {
-    public IdentityUser()
+    public IdentityUser Create(
+        string? userName,
+        string? email,
+        string? password,
+        IdentityGuid identityUserId,
+        Guid identityRoleId)
     {
+        SetUserName(userName);
+        SetEmail(email);
+        HandlePassword(password);
+        
+        IdentityRoleId = identityRoleId;
+        UserId = identityUserId;
+
+        return this;
     }
 
-    public IdentityUser(string userName) : this()
+    public string? UserName { get; private set; }
+
+    public string? NormalizedUserName { get; private set; }
+
+    public string? Email { get; private set; }
+
+    public string? NormalizedEmail { get; private set; }
+
+    public bool EmailConfirmed { get; private set; }
+
+    public byte[]? PasswordHash { get; private set; }
+
+    public byte[]? PasswordSalt { get; private set; }
+
+    public string? ConcurrencyStamp { get; private set; } = Guid.NewGuid().ToString();
+
+    public string? PhoneNumber { get; private set; }
+
+    public bool PhoneNumberConfirmed { get; private set; }
+
+    public OtpCode OtpCode { get; private set; } = new();
+
+    public Guid IdentityRoleId { get; private set; }
+
+    public IdentityRole IdentityRole { get; private set; } = null!;
+
+    public User User { get; private set; } = null!;
+
+    public IdentityGuid UserId { get; private set; } = null!;
+
+    //public virtual DateTimeOffprivate set? LockoutEnd { get; private set; }
+
+    //public virtual bool LockoutEnabled { get; private set; }
+
+    //public virtual int AccessFailedCount { get; private set; }
+
+    internal void SetUserName(string? value)
     {
-        UserName = userName;
+        if (UserName is not null && value is null)
+        {
+            throw new ArgumentException("Invalid user name.");
+        }
+
+        if (value is not null)
+        {
+            NormalizedUserName = value.ToUpperInvariant();
+        }
+
+        UserName = value;
     }
 
-    public string? UserName { get; set; }
+    internal void SetEmail(string? value)
+    {
+        if (Email is not null && value is null)
+        {
+            throw new ArgumentException("Invalid email.");
+        }
+        
+        if (value is not null)
+        {
+            NormalizedEmail = value.ToUpperInvariant();
+        }
 
-    public string? NormalizedUserName { get; set; }
-
-    public string? Email { get; set; }
-
-    public string? NormalizedEmail { get; set; }
-
-    public bool EmailConfirmed { get; set; }
-
-    public string? PasswordHash { get; set; }
-
-    public string? ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
-
-    public string? PhoneNumber { get; set; }
-
-    public bool PhoneNumberConfirmed { get; set; }
+        Email = value;
+    }
     
-    public Guid IdentityRoleId { get; set; }
-    
-    public IdentityRole IdentityRole { get; set; }
+    private void HandlePassword(string? password)
+    {
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            throw new ArgumentException("Invalid password.");
+        }
 
-    //public virtual DateTimeOffset? LockoutEnd { get; set; }
+        using var hmac = new HMACSHA512();
 
-    //public virtual bool LockoutEnabled { get; set; }
-
-    //public virtual int AccessFailedCount { get; set; }
+        PasswordSalt = hmac.Key;
+        PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+    }
 
     public override string ToString()
         => UserName ?? string.Empty;

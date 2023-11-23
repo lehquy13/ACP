@@ -1,4 +1,4 @@
-namespace ACP.WebAPI
+namespace ACP.Api
 {
     public class WeatherForecast
     {

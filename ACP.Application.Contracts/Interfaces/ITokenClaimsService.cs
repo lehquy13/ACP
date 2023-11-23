@@ -1,6 +1,8 @@
-﻿namespace ACP.Application.Contracts.Interfaces;
+﻿using ACP.Application.Contracts.DataTransferObjects.Authentications;
+
+namespace ACP.Application.Contracts.Interfaces;
 
 public interface ITokenClaimsService
 {
-    Task<string> GetTokenAsync(string userName);
+    string GetTokenAsync(IdentityUserDto identityUserDto);
 }

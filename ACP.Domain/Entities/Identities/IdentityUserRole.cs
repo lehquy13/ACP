@@ -1,4 +1,5 @@
 ﻿using ACP.Domain.Common.Primitives;
+using ACP.Domain.Entities.ValueObjects;
 
 namespace ACP.Domain.Entities.Identities;
 
@@ -7,7 +8,7 @@ namespace ACP.Domain.Entities.Identities;
 /// </summary>
 public class IdentityUserRole : Entity<Guid>
 {
-    public Guid UserId { get; set; }
+    public IdentityGuid UserId { get; set; } = null!;
 
-    public Guid RoleId { get; set; }
+    public IdentityGuid RoleId { get; set; } = null!;
 }

@@ -2,7 +2,7 @@
 using System.Linq.Expressions;
 using ACP.Domain.Common.Abstractions;
 
-namespace ACP.Domain.Repositories;
+namespace ACP.Domain.Interfaces.Repositories;
 
 public interface IReadOnlyRepository<TEntity, TId> where TEntity : class, IEntity<TId> where TId : notnull
 {
