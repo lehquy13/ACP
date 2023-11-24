@@ -4,7 +4,7 @@ using ACP.Domain.Shared.User;
 
 namespace ACP.Domain.Entities;
 
-public class User : FullAuditedEntity<IdentityGuid>
+public class User : FullAuditedAggregateRoot<IdentityGuid>
 {
     public string FirstName { get; private set; } = string.Empty;
 

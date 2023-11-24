@@ -6,7 +6,7 @@ namespace ACP.Domain.Interfaces.Repositories;
 
 //TODO: may change IEntity<TEntity> to IAggregateRoot<TId> 
 public interface IRepository<TEntity, TId> : IReadOnlyRepository<TEntity, TId>
-    where TEntity : class, IEntity<TId> where TId : notnull
+    where TEntity : class, IAggregateRoot<TId> where TId : notnull
 {
     //Queries
     /// <summary>

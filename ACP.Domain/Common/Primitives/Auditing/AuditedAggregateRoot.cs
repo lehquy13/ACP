@@ -2,7 +2,7 @@
 
 namespace ACP.Domain.Common.Primitives.Auditing;
 
-public abstract class AuditedAggregateRoot<TId> : Entity<TId>, IAuditedObject<TId>
+public abstract class AuditedAggregateRoot<TId> : AggregateRoot<TId>, IAuditedObject<TId>
     where TId : notnull
 {
     //Creation

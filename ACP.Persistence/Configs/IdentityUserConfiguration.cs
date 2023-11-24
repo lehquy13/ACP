@@ -52,7 +52,7 @@ public class IdentityUserConfiguration : IEntityTypeConfiguration<IdentityUser>
                     .HasColumnName("ExpiredTime");
             });
 
-        builder.HasOne<IdentityRole>()
-            .WithMany().HasForeignKey(r => r.IdentityRoleId);
+        builder.OwnsOne(p => p.IdentityRole);
+
     }
 }
