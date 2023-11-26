@@ -1,6 +1,6 @@
 namespace ACP.Results;
 
-public class Result<T> : ResultBase, IHasError where T : notnull
+public class Result<T> : ResultBase, IHasErrorDetail where T : class
 {
     private readonly T? _value;
 
@@ -11,7 +11,7 @@ public class Result<T> : ResultBase, IHasError where T : notnull
     {
         _value = value;
     }
-    
+
     /// <summary>
     /// Implicitly convert a value to its possible result.
     /// </summary>
@@ -21,6 +21,13 @@ public class Result<T> : ResultBase, IHasError where T : notnull
         value is not null
             ? new Result<T>(value, true, Error.None)
             : new Result<T>(default, false, Error.NullValue);
+
+    /// <summary>
+    /// Implicitly convert an error to a failed result.
+    /// </summary>
+    /// <param name="error"></param>
+    /// <returns></returns>
+    public static implicit operator Result<T>(Error error) => new(null, false, error);
 
     /// <summary>
     /// Static factory method to create a successful result.
@@ -37,6 +44,13 @@ public class Result<T> : ResultBase, IHasError where T : notnull
     /// <returns></returns>
     public static Result<T> Success(T value, string message)
         => new(value, true, Error.None) { DisplayMessage = message };
+
+    /// <summary>
+    /// Static factory method to create a failed result with an error.
+    /// </summary>
+    /// <param name="error"></param>
+    /// <returns></returns>
+    public static Result<T> Fail(Error error) => new(null, false, error);
 
     /// <summary>
     /// Static factory method to create a failed result with an error.
@@ -62,4 +76,10 @@ public class Result<T> : ResultBase, IHasError where T : notnull
     /// <returns></returns>
     public static implicit operator Result<T>(Result result)
         => new(default, result.IsSuccess, result.Error);
+
+    public override Result<T> WithError(Error error)
+    {
+        Errors.Add(error);
+        return this;
+    }
 }

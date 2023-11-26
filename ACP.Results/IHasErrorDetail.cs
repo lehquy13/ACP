@@ -1,6 +1,6 @@
 namespace ACP.Results;
 
-interface IHasError
+interface IHasErrorDetail
 {
     Error Error { get; }
 }
