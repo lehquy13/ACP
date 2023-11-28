@@ -17,15 +17,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Persistence", "ACP.Pers
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ACP.DDD", "ACP.DDD", "{BCC7CB6D-F88B-414D-9BC8-D9FFD40E4708}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACP.Auditing.Contracts", "ACP.Auditing.Contracts\ACP.Auditing.Contracts.csproj", "{81C60742-B848-4197-BD2A-E21CC021D74D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Auditing.Contracts", "ACP.Auditing.Contracts\ACP.Auditing.Contracts.csproj", "{81C60742-B848-4197-BD2A-E21CC021D74D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACP.DependencyInjection", "ACP.DependencyInjection\ACP.DependencyInjection.csproj", "{E4451DED-3AD8-4C73-A511-3C81C80E0780}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.DependencyInjection", "ACP.DependencyInjection\ACP.DependencyInjection.csproj", "{E4451DED-3AD8-4C73-A511-3C81C80E0780}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACP.Results", "ACP.Results\ACP.Results.csproj", "{8DCB7D91-D8A9-4CA1-BD4B-1811959F3AD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Results", "ACP.Results\ACP.Results.csproj", "{8DCB7D91-D8A9-4CA1-BD4B-1811959F3AD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACP.Infrastructure", "ACP.Infrastructure\ACP.Infrastructure.csproj", "{6B1A7DDA-AB00-4C18-B301-A94205F806EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Infrastructure", "ACP.Infrastructure\ACP.Infrastructure.csproj", "{6B1A7DDA-AB00-4C18-B301-A94205F806EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACP.Mediator", "ACP.Mediator\ACP.Mediator.csproj", "{0A23BB73-CA41-4618-8993-335DA96CDAA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Mediator", "ACP.Mediator\ACP.Mediator.csproj", "{0A23BB73-CA41-4618-8993-335DA96CDAA8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACP.Mediator.Abstraction", "ACP.Mediator.Abstraction\ACP.Mediator.Abstraction.csproj", "{7AB0B0A4-06BE-48D4-967E-1969EA89F887}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,17 +79,22 @@ Global
 		{0A23BB73-CA41-4618-8993-335DA96CDAA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A23BB73-CA41-4618-8993-335DA96CDAA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A23BB73-CA41-4618-8993-335DA96CDAA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AB0B0A4-06BE-48D4-967E-1969EA89F887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AB0B0A4-06BE-48D4-967E-1969EA89F887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AB0B0A4-06BE-48D4-967E-1969EA89F887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AB0B0A4-06BE-48D4-967E-1969EA89F887}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {5D4C5455-8DE7-448D-A5E1-9D8C63A0782E}
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{81C60742-B848-4197-BD2A-E21CC021D74D} = {BCC7CB6D-F88B-414D-9BC8-D9FFD40E4708}
 		{E4451DED-3AD8-4C73-A511-3C81C80E0780} = {BCC7CB6D-F88B-414D-9BC8-D9FFD40E4708}
 		{8DCB7D91-D8A9-4CA1-BD4B-1811959F3AD6} = {BCC7CB6D-F88B-414D-9BC8-D9FFD40E4708}
 		{0A23BB73-CA41-4618-8993-335DA96CDAA8} = {BCC7CB6D-F88B-414D-9BC8-D9FFD40E4708}
+		{7AB0B0A4-06BE-48D4-967E-1969EA89F887} = {BCC7CB6D-F88B-414D-9BC8-D9FFD40E4708}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5D4C5455-8DE7-448D-A5E1-9D8C63A0782E}
 	EndGlobalSection
 EndGlobal
