@@ -2,10 +2,8 @@
 
 public record RegisterCommand
 (
-    string Name,
+    string Username,
     string Email,
     string Password,
-    string City,
-    string Country,
     string PhoneNumber
 );

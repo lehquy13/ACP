@@ -6,7 +6,7 @@ public class PaginatedList<T> : List<T>, IPaginated, IHasTotalItemsCount, IHasTo
 
     public int PageSize { get; private set; }
 
-    public int TotalItems { get; private set; }
+    public long TotalItems { get; private set; }
 
     public int TotalPages { get; private set; }
 

@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using ACP.Domain.Specifications.Interfaces;
 
 namespace ACP.Domain.Specifications;
 

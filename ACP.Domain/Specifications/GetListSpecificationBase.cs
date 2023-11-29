@@ -1,12 +1,13 @@
-﻿using ACP.Domain.Shared.Paginated;
+﻿using ACP.Domain.Specifications.Interfaces;
 
 namespace ACP.Domain.Specifications;
 
-public abstract class GetListSpecificationBase<TLEntity> : SpecificationBase<TLEntity>, IPaginated
+public abstract class GetListSpecificationBase<TEntity>
+    : SpecificationBase<TEntity>, IGetListSpecification<TEntity>
 {
     public int PageIndex { get; private set; }
-    
-    public int PageSize{ get; private set; }
+
+    public int PageSize { get; private set; }
 
     public GetListSpecificationBase(int pageIndex, int pageSize)
     {

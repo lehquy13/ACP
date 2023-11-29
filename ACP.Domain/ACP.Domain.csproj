@@ -15,8 +15,4 @@
     <Compile Remove="Common\Abstractions\Common\IListResult.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-  </ItemGroup>
-
 </Project>

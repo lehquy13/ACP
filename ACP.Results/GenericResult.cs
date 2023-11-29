@@ -11,24 +11,6 @@ public class Result<T> : ResultBase, IHasErrorDetail where T : class
     {
         _value = value;
     }
-
-    /// <summary>
-    /// Implicitly convert a value to its possible result.
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public static implicit operator Result<T>(T? value) =>
-        value is not null
-            ? new Result<T>(value, true, Error.None)
-            : new Result<T>(default, false, Error.NullValue);
-
-    /// <summary>
-    /// Implicitly convert an error to a failed result.
-    /// </summary>
-    /// <param name="error"></param>
-    /// <returns></returns>
-    public static implicit operator Result<T>(Error error) => new(null, false, error);
-
     /// <summary>
     /// Static factory method to create a successful result.
     /// </summary>
@@ -69,6 +51,8 @@ public class Result<T> : ResultBase, IHasErrorDetail where T : class
     /// <returns></returns>
     public static Result<T> Fail(string errorMessage) => Result.Fail(errorMessage);
 
+    #region implicit operators
+
     /// <summary>
     /// A result object can be implicitly converted to Result<![CDATA[T]]>.
     /// </summary>
@@ -77,9 +61,44 @@ public class Result<T> : ResultBase, IHasErrorDetail where T : class
     public static implicit operator Result<T>(Result result)
         => new(default, result.IsSuccess, result.Error);
 
+    /// <summary>
+    /// Implicitly convert an exception to a failed result.
+    /// </summary>
+    /// <param name="error"></param>
+    /// <returns></returns>
+    public static implicit operator Result<T>(Exception error)
+        => new(default, false, new Error("Unexpected error with exception", error.Message));
+    
+    /// <summary>
+    /// Implicitly convert a value to its possible result.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    public static implicit operator Result<T>(T? value) =>
+        value is not null
+            ? new Result<T>(value, true, Error.None)
+            : new Result<T>(default, false, Error.NullValue);
+
+    /// <summary>
+    /// Implicitly convert an error to a failed result.
+    /// </summary>
+    /// <param name="error"></param>
+    /// <returns></returns>
+    public static implicit operator Result<T>(Error error) => new(null, false, error);
+    #endregion
+
+
     public override Result<T> WithError(Error error)
     {
         Errors.Add(error);
+        return this;
+    }
+
+    public override Result<T> WithError(Exception error)
+    {
+        Errors.Add(
+            new Error("Unexpected error with exception", error.Message)
+        );
         return this;
     }
 }

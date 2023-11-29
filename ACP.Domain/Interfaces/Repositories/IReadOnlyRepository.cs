@@ -1,20 +1,18 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using System.Linq.Expressions;
-using ACP.Domain.Common.Abstractions;
+﻿using ACP.Domain.Common.Abstractions;
+using ACP.Domain.Specifications.Interfaces;
 
 namespace ACP.Domain.Interfaces.Repositories;
 
+//TODO: Consider to change IEntity to IAggregateRoot
 public interface IReadOnlyRepository<TEntity, TId> where TEntity : class, IEntity<TId> where TId : notnull
 {
-    //TODO: may include bool includeDetails = false, as a second parameter
-    Task<List<TEntity>> GetListAsync( [NotNull] Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
+    Task<TEntity?> GetAsync(ISpecification<TEntity> spec, CancellationToken cancellationToken = default);
+
+    Task<List<TEntity>> GetListAsync(CancellationToken cancellationToken = default);
+
+    Task<List<TEntity>> GetListAsync(IGetListSpecification<TEntity> spec, CancellationToken cancellationToken = default);
 
     Task<long> GetCountAsync(CancellationToken cancellationToken = default);
-    
-    Task<List<TEntity>> GetPagedListAsync(
-        int skipCount,
-        int maxResultCount,
-        string sorting,
-        bool includeDetails = false,
-        CancellationToken cancellationToken = default);
+
+    Task<long> GetCountAsync(Specifications.Interfaces.ISpecification<TEntity> spec, CancellationToken cancellationToken = default);
 }

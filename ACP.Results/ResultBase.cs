@@ -30,4 +30,5 @@ public abstract class ResultBase : IResult
     }
 
     public abstract ResultBase WithError(Error error);
+    public abstract ResultBase WithError(Exception error);
 }

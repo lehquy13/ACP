@@ -1,5 +1,5 @@
-﻿using ACP.Domain.Entities.Identities;
-using ACP.Domain.Entities.ValueObjects;
+﻿using ACP.Domain.Business.Identities;
+using ACP.Domain.Business.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

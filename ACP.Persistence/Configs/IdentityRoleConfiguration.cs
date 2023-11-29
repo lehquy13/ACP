@@ -1,4 +1,4 @@
-﻿using ACP.Domain.Entities.Identities;
+﻿using ACP.Domain.Business.Identities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

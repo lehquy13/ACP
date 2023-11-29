@@ -1,4 +1,4 @@
-﻿using ACP.Domain.Entities;
+﻿using ACP.Domain.Business;
 
 namespace ACP.Domain.Specifications.Users;
 

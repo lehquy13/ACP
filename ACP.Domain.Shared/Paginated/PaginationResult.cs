@@ -9,7 +9,7 @@ public class PaginationResult<T> : ResultBase, IPaginated, IHasTotalItemsCount, 
 
     public int PageSize { get; private set; }
 
-    public int TotalItems { get; private set; }
+    public long TotalItems { get; private set; }
 
     public int TotalPages { get; private set; }
 
@@ -26,7 +26,7 @@ public class PaginationResult<T> : ResultBase, IPaginated, IHasTotalItemsCount, 
     /// <param name="totalCount"></param>
     /// <param name="pageIndex"></param>
     /// <param name="pageSize"></param>
-    private PaginationResult(List<T> value, int totalCount, int pageIndex, int pageSize) : base(true, Error.None)
+    private PaginationResult(List<T> value, long totalCount, int pageIndex, int pageSize) : base(true, Error.None)
     {
         PageIndex = pageIndex;
         TotalPages = (int)Math.Ceiling(totalCount / (double)pageSize);
@@ -37,7 +37,7 @@ public class PaginationResult<T> : ResultBase, IPaginated, IHasTotalItemsCount, 
 
     public static PaginationResult<T> Create(
         List<T> items,
-        int totalCount,
+        long totalCount,
         int pageIndex,
         int pageSize,
         string message = "")
@@ -47,4 +47,27 @@ public class PaginationResult<T> : ResultBase, IPaginated, IHasTotalItemsCount, 
 
     public static implicit operator PaginationResult<T>(Result result)
         => new(new(), 0, 0, 0);
+
+    public static implicit operator PaginationResult<T>(Exception error)
+        => new(new(), 0, 0, 0)
+        {
+            Errors = new()
+            {
+                new Error("Unexpected error with exception", error.Message)
+            }
+        };
+
+    public override PaginationResult<T> WithError(Error error)
+    {
+        Errors.Add(error);
+        return this;
+    }
+
+    public override PaginationResult<T> WithError(Exception error)
+    {
+        Errors.Add(
+            new Error("Unexpected error with exception", error.Message)
+        );
+        return this;
+    }
 }

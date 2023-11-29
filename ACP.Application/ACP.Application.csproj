@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ACP.Application.Contracts\ACP.Application.Contracts.csproj" />
+    <ProjectReference Include="..\ACP.Domain\ACP.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
   </ItemGroup>
 
 </Project>
