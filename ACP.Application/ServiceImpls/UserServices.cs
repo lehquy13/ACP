@@ -1,5 +1,6 @@
 ﻿using ACP.Application.Contracts.DataTransferObjects.Users;
 using ACP.Application.Contracts.Interfaces.Business;
+using ACP.DependencyInjection;
 using ACP.Domain.Business;
 using ACP.Domain.Business.Identities;
 using ACP.Domain.Business.ValueObjects;
@@ -12,7 +13,7 @@ using MapsterMapper;
 
 namespace ACP.Application.ServiceImpls;
 
-public class UserServices : ServiceBase, IUserServices
+public class UserServices : ServiceBase, IUserServices, IScoped<IUserServices>
 {
     private readonly IUserRepository _userRepository;
     private readonly IIdentityRepository _identityRepository;
@@ -23,8 +24,8 @@ public class UserServices : ServiceBase, IUserServices
         IAppLogger<UserServices> logger,
         IUnitOfWork unitOfWork,
         IUserRepository userRepository, IIdentityDomainServices identityDomainServices,
-        IIdentityRepository identityRepository) : base(mapper, unitOfWork,
-        logger)
+        IIdentityRepository identityRepository)
+        : base(mapper, unitOfWork, logger)
     {
         _userRepository = userRepository;
         _identityDomainServices = identityDomainServices;
@@ -36,7 +37,7 @@ public class UserServices : ServiceBase, IUserServices
         try
         {
             var userSpec = new UserListQuerySpec(userFilterParams.PageIndex, userFilterParams.PageSize);
-            var totalCount = await _userRepository.GetCountAsync(userSpec);
+            var totalCount = await _userRepository.CountAsync(userSpec);
             var users = await _userRepository.GetListAsync(userSpec);
             var usersForListDto = Mapper.Map<List<UserForListDto>>(users);
 

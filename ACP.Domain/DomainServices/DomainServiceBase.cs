@@ -2,8 +2,7 @@
 
 namespace ACP.Domain.DomainServices;
 
-public abstract class DomainServiceBase(IAppLogger<IdentityDomainServices> logger, IUnitOfWork unitOfWork)
+public abstract class DomainServiceBase(IAppLogger<IdentityDomainServices> logger)
 {
     protected readonly IAppLogger<IdentityDomainServices> Logger = logger;
-    protected readonly IUnitOfWork UnitOfWork = unitOfWork;
 }

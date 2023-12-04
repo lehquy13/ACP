@@ -6,8 +6,8 @@ using Microsoft.Extensions.Options;
 
 namespace ACP.Infrastructure.CloudServices;
 
-public class CloudinaryServices(IOptions<CloudinarySetting> cloudinarySetting, IAppLogger<CloudinaryServices> logger)
-    : ICloudServices
+public class CloudinaryService(IOptions<CloudinarySetting> cloudinarySetting, IAppLogger<CloudinaryService> logger)
+    : ICloudService
 {
     private Cloudinary Cloudinary { get; set; } = new(
         new Account(

@@ -6,6 +6,7 @@ namespace ACP.DependencyInjection
     public static class ServiceCollectionsExtensions
     {
         #region Extensions
+
         /// <summary>
         /// Registers all items for given assemblies
         /// </summary>
@@ -44,7 +45,6 @@ namespace ACP.DependencyInjection
         /// Registers all items for calling assembly
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="assemblies"></param>
         /// <returns></returns>
         public static IServiceCollection AddServicedForCallingAssembly(this IServiceCollection services)
         {
@@ -52,21 +52,39 @@ namespace ACP.DependencyInjection
 
             return AddServiced(services, callingAssembly);
         }
+
         #endregion
 
         #region Registration
-        private static void RegisterWithTypes(IServiceCollection services, Type serviceType, Type implementationType, ServiceLifetime lifetime)
+
+        private static void RegisterWithTypes(IServiceCollection services, Type serviceType, Type implementationType,
+            ServiceLifetime lifetime)
         {
             var descriptor = new ServiceDescriptor(serviceType, implementationType, lifetime);
 
             services.Add(descriptor);
         }
 
-        private static void RegisterWithImplementationFactory(IServiceCollection services, Type implementationType, ServiceLifetime lifetime)
+        private static void RegisterWithImplementationFactory(IServiceCollection services, Type implementationType,
+            ServiceLifetime lifetime)
         {
             var classInstance = Activator.CreateInstance(implementationType);
-            var factory = (Func<IServiceProvider, object>)implementationType.GetMethod(nameof(IHasImplementationFactory.GetFactory)).Invoke(classInstance, null);
-            var descriptor = new ServiceDescriptor(implementationType, factory, lifetime);
+            var factory = implementationType
+                .GetMethod(nameof(IHasImplementationFactory.GetFactory));
+            if (factory is null)
+            {
+                throw new InvalidOperationException($"Factory method is not defined for {implementationType.FullName}");
+            }
+
+            var factory1 = factory.Invoke(classInstance, null);
+
+            if (factory1 is null)
+            {
+                throw new InvalidOperationException($"Factory method returned null for {implementationType.FullName}");
+            }
+
+            var factoryDelegate = (Func<IServiceProvider, object>)factory1;
+            var descriptor = new ServiceDescriptor(implementationType, factoryDelegate, lifetime);
 
             services.Add(descriptor);
         }
@@ -74,6 +92,7 @@ namespace ACP.DependencyInjection
         #endregion Registration
 
         #region Helpers
+
         private static (Type serviceType, Type implementationType) GetTypes(Type serviceToRegister)
         {
             var genericInterface = serviceToRegister

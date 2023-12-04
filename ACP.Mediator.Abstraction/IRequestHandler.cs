@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ACP.Mediator.Abstraction;
 
-namespace ACP.Mediator.Abstraction;
+public interface IMediatorRequestHandler;
 
-public interface IRequestHandler<in TReq> where TReq : class, IRequest
+public interface IRequestHandler<in TReq> : IMediatorRequestHandler where TReq : class, IRequest
 {
     Task HandleAsync(TReq request, CancellationToken cancelToken = default);
 }
 
-public interface IRequestHandler<in TReq, TRes> where TReq : class, IRequest<TRes>
+public interface IRequestHandler<in TReq, TRes> : IMediatorRequestHandler where TReq : class, IRequest<TRes>
 {
     Task<TRes> HandleAsync(TReq request, CancellationToken cancelToken = default);
 }

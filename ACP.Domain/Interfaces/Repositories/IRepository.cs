@@ -14,8 +14,8 @@ public interface IRepository<TEntity, TId> : IReadOnlyRepository<TEntity, TId>
     Task<TEntity?> FindAsync(TId id);
 
     //Insert
-    Task<TEntity> InsertAsync(TEntity entity);
+    Task InsertAsync(TEntity entity);
 
     //Remove
-    Task DeleteAsync(TId spec);
+    Task<bool> DeleteAsync(TId spec);
 }

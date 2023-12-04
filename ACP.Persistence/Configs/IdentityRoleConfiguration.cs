@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace ACP.Infrastructure.Persistence.Configs;
 
-public class IdentityRoleConfiguration : IEntityTypeConfiguration<IdentityRole>
+internal class IdentityRoleConfiguration : IEntityTypeConfiguration<IdentityRole>
 {
     public void Configure(EntityTypeBuilder<IdentityRole> builder)
     {

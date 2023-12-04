@@ -1,4 +1,6 @@
-﻿namespace ACP.Application.Contracts.DataTransferObjects.Authentications;
+﻿using ACP.Mediator.Abstraction;
+
+namespace ACP.Application.Contracts.DataTransferObjects.Authentications;
 
 public record RegisterCommand
 (
@@ -6,4 +8,4 @@ public record RegisterCommand
     string Email,
     string Password,
     string PhoneNumber
-);
+) : IRequest<AuthenticationResult>;

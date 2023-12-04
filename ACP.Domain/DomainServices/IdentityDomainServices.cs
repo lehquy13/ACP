@@ -9,10 +9,9 @@ using ACP.Results;
 namespace ACP.Domain.DomainServices;
 
 public class IdentityDomainServices(IAppLogger<IdentityDomainServices> logger,
-        IUnitOfWork unitOfWork,
         IIdentityRepository identityUserRepository,
         IRepository<IdentityRole, Guid> identityRoleRepository)
-    : DomainServiceBase(logger, unitOfWork), IIdentityDomainServices
+    : DomainServiceBase(logger), IIdentityDomainServices
 {
     public async Task<IdentityUser?> SignInAsync(string email, string password)
     {
@@ -51,9 +50,9 @@ public class IdentityDomainServices(IAppLogger<IdentityDomainServices> logger,
             roles.First().Id
         );
 
-        var createdIdentityUser = await identityUserRepository.InsertAsync(identityUser);
+        await identityUserRepository.InsertAsync(identityUser);
 
-        return createdIdentityUser;
+        return identityUser;
     }
 
     public async Task<Result> ChangePasswordAsync(IdentityGuid identityId, string currentPassword, string newPassword)

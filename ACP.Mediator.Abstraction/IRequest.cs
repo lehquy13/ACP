@@ -1,7 +1,9 @@
-﻿namespace ACP.Mediator.Abstraction;
+﻿using ACP.DependencyInjection;
 
-public interface IBaseRequest { }
+namespace ACP.Mediator.Abstraction;
 
-public interface IRequest : IBaseRequest { }
+public interface IBaseRequest;
 
-public interface IRequest<in T> : IBaseRequest { }
+public interface IRequest : IBaseRequest;
+
+public interface IRequest<T> : IBaseRequest;

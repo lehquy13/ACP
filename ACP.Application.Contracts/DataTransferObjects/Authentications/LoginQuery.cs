@@ -1,3 +1,5 @@
-﻿namespace ACP.Application.Contracts.DataTransferObjects.Authentications;
+﻿using ACP.Mediator.Abstraction;
 
-public record LoginQuery(string Email, string Password);
+namespace ACP.Application.Contracts.DataTransferObjects.Authentications;
+
+public record LoginQuery(string Email, string Password) : IRequest<AuthenticationResult>;

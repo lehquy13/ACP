@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ACP.Auditing.Contracts\ACP.Auditing.Contracts.csproj" />
     <ProjectReference Include="..\ACP.Domain.Shared\ACP.Domain.Shared.csproj" />
+    <ProjectReference Include="..\ACP.Mediator\ACP.Mediator.csproj" />
   </ItemGroup>
 
 </Project>

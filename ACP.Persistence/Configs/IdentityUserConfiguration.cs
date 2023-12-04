@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace ACP.Infrastructure.Persistence.Configs;
 
 //TODO: learn how to config with owns many
-public class IdentityUserConfiguration : IEntityTypeConfiguration<IdentityUser>
+internal class IdentityUserConfiguration : IEntityTypeConfiguration<IdentityUser>
 {
     public void Configure(EntityTypeBuilder<IdentityUser> builder)
     {

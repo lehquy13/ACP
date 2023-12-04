@@ -1,3 +1,5 @@
+using ACP.Application.Contracts.DataTransferObjects.Authentications;
+using ACP.Mediator.Abstraction;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ACP.Api.Controllers
@@ -12,22 +14,31 @@ namespace ACP.Api.Controllers
     };
 
         private readonly ILogger<WeatherForecastController> _logger;
+        private readonly IMediator _mediator;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(
+            ILogger<WeatherForecastController> logger, 
+            IMediator mediator)
         {
             _logger = logger;
+            _mediator = mediator;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IActionResult> Get()
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var loginQuery = new LoginQuery("test", "test");
+            var result = await _mediator.SendAsync(loginQuery);
+            return Ok(result);
+        }
+        
+        [HttpGet]
+        [Route("helloApi")]
+        public async Task<IActionResult> PonPon()
+        {
+            var loginQuery = new RegisterCommand("test", "test", "test", "test");
+            var result = await _mediator.SendAsync(loginQuery);
+            return Ok(result);
         }
     }
 }

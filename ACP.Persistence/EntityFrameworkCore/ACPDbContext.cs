@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace ACP.Infrastructure.Persistence.EntityFrameworkCore;
 
-public class AcpDbContext : DbContext
+internal class AcpDbContext : DbContext
 {
     public DbSet<User> Users { get; set; } = null!;
 
@@ -28,7 +28,7 @@ public class AcpDbContext : DbContext
 }
 
 //using to support add migration
-public class AcpDbContextFactory : IDesignTimeDbContextFactory<AcpDbContext>
+internal class AcpDbContextFactory : IDesignTimeDbContextFactory<AcpDbContext>
 {
     public AcpDbContext CreateDbContext(string[] args)
     {

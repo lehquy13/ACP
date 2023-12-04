@@ -10,4 +10,3 @@ public interface IModificationAuditedObject<TLastModifierId> : IHasModificationT
     /// </summary>
     TLastModifierId? LastModifierId { get; }
 }
-

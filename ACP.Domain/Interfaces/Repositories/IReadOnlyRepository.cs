@@ -12,7 +12,7 @@ public interface IReadOnlyRepository<TEntity, TId> where TEntity : class, IEntit
 
     Task<List<TEntity>> GetListAsync(IGetListSpecification<TEntity> spec, CancellationToken cancellationToken = default);
 
-    Task<long> GetCountAsync(CancellationToken cancellationToken = default);
+    Task<long> CountAsync(CancellationToken cancellationToken = default);
 
-    Task<long> GetCountAsync(Specifications.Interfaces.ISpecification<TEntity> spec, CancellationToken cancellationToken = default);
+    Task<long> CountAsync(ISpecification<TEntity> spec, CancellationToken cancellationToken = default);
 }

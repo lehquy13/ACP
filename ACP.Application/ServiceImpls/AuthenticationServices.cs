@@ -2,6 +2,7 @@
 using ACP.Application.Contracts.Interfaces;
 using ACP.Application.Contracts.Interfaces.Business;
 using ACP.Application.Contracts.Interfaces.Infrastructures;
+using ACP.DependencyInjection;
 using ACP.Domain.Business.Identities;
 using ACP.Domain.Business.ValueObjects;
 using ACP.Domain.DomainServices.Interfaces;
@@ -20,7 +21,7 @@ public class AuthenticationServices(IMapper mapper,
         IIdentityDomainServices identityDomainServices,
         IJwtTokenGenerator jwtTokenGenerator,
         IEmailSender emailSender)
-    : ServiceBase(mapper, unitOfWork, logger), IAuthenticationServices
+    : ServiceBase(mapper, unitOfWork, logger), IAuthenticationServices, IScoped<IAuthenticationServices>
 {
     public async Task<Result<AuthenticationResult>> Login(LoginQuery loginQuery)
     {
@@ -96,10 +97,9 @@ public class AuthenticationServices(IMapper mapper,
     public async Task<Result> ForgotPassword(string email)
     {
         var identityUser = await identityRepository.GetAsync(
-               new UserGetByEmailSpec(email)
-            );
+            new UserGetByEmailSpec(email)
+        );
 
-        ISpecification<IdentityUser> spec = new UserGetByEmailSpec(email);
         if (identityUser is null)
         {
             return Result.Fail(AuthenticationErrorMessages.UserNotFound);
@@ -168,14 +168,5 @@ public class AuthenticationServices(IMapper mapper,
         }
 
         return Result.Fail(AuthenticationErrorMessages.InvalidToken);
-    }
-
-    public AuthenticationServices(IMapper mapper,
-        IUnitOfWork unitOfWork,
-        IAppLogger<ServiceBase> logger,
-        IIdentityDomainServices identityDomainServices,
-        IJwtTokenGenerator jwtTokenGenerator,
-        IEmailSender emailSender) : this(mapper, unitOfWork, logger, null, identityDomainServices, jwtTokenGenerator, emailSender)
-    {
     }
 }

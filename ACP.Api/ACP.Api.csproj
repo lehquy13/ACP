@@ -13,6 +13,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ACP.Application.Contracts\ACP.Application.Contracts.csproj" />
+    <ProjectReference Include="..\ACP.Application\ACP.Application.csproj" />
+    <ProjectReference Include="..\ACP.Infrastructure\ACP.Infrastructure.csproj" />
+    <ProjectReference Include="..\ACP.Persistence\ACP.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

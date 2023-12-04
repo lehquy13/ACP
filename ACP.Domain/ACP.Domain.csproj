@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ACP.Auditing.Contracts\ACP.Auditing.Contracts.csproj" />
+    <ProjectReference Include="..\ACP.DependencyInjection\ACP.DependencyInjection.csproj" />
     <ProjectReference Include="..\ACP.Domain.Shared\ACP.Domain.Shared.csproj" />
   </ItemGroup>
 
